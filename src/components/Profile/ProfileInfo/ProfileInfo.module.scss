@@ -1,0 +1,52 @@
+.profileInfoWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .photo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+    }
+
+    .profileInfo {
+        display: flex;
+        gap: 15px;
+
+        .image {
+            width: 70px;
+            height: 70px;
+            border-radius: 4px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            .item {
+                font-size: 14px;
+                line-height: 18px;
+
+                &.country {
+                    color: #BCBCBC;
+                }
+            }
+        }
+    }
+}

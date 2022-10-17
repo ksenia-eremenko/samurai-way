@@ -1,0 +1,18 @@
+.header {
+    grid-area: h;
+    background: #1F1D3A;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    .logo {
+      color: #fff;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 20px;
+      cursor: pointer;
+      &:hover {
+        color: #7B9AB7;
+      }
+    }
+  }
