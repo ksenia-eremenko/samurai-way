@@ -1,5 +1,6 @@
 import React, { KeyboardEvent } from 'react'
-import { addPostActionCreator, PostType, updateNewPostTextActionCreator } from '../../../redux/state';
+import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profile-reducer'
+import { PostType } from '../../../redux/state'
 import s from './MyPosts.module.scss'
 import Post from './Post/Post'
 

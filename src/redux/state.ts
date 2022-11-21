@@ -1,8 +1,7 @@
 import { v1 } from "uuid"
-const ADD_POST = "ADD_POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
-const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE";
-const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE";
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -150,49 +149,13 @@ const store: StoreType = {
         this._callSubscriber = observer;
     },
     dispatch(action: any) {
-        if (action.type === ADD_POST) {
-            const newPost = {
-                id: v1(),
-                message: this._state.profilePage.newPostText,
-                likeCount: 4,
-                avatar: "https://vjoy.cc/wp-content/uploads/2020/10/2e91c881628ae39e9d7f66a9740f08c0.jpg"
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.textPost;
-            this._callSubscriber(this._state);
-        } else if (action.type === ADD_NEW_MESSAGE) {
-            const newMessage = {
-                id: v1(),
-                textMessage: this.getState().dialogsPage.newMessageText
-            };
-            this._state.dialogsPage.messages.push(newMessage);
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE) {
-            this._state.dialogsPage.newMessageText = action.textMessage;
-            this._callSubscriber(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+
+        this._callSubscriber(this._state);
     }
 }
-
-
-export const addPostActionCreator = () => ({ type: ADD_POST })
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        textPost: text
-    }
-}
-
-export const addNewMessageActionCreator = () => ({ type: ADD_NEW_MESSAGE })
-export const updateNewMessageActionCreator = (text: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE,
-        textMessage: text
-    }
-}
-
 export default store;
 
 //  window.store = store;
