@@ -1,4 +1,8 @@
 import { v1 } from "uuid"
+const ADD_POST = "ADD_POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
+const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE";
+const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE";
 
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -39,9 +43,9 @@ export type SidebarType = {}
 export type StoreType = {
     _state: RootStateType,
     _callSubscriber: (state: RootStateType) => void
-    subscribe : (observer: (state: RootStateType) => void) => void
-    getState : () => RootStateType
-    dispatch : (action: any) => void
+    subscribe: (observer: (state: RootStateType) => void) => void
+    getState: () => RootStateType
+    dispatch: (action: any) => void
 }
 
 const store: StoreType = {
@@ -145,8 +149,8 @@ const store: StoreType = {
     subscribe(observer: (state: RootStateType) => void) {
         this._callSubscriber = observer;
     },
-    dispatch (action: any) {
-        if (action.type === 'ADD_POST') {
+    dispatch(action: any) {
+        if (action.type === ADD_POST) {
             const newPost = {
                 id: v1(),
                 message: this._state.profilePage.newPostText,
@@ -154,21 +158,38 @@ const store: StoreType = {
                 avatar: "https://vjoy.cc/wp-content/uploads/2020/10/2e91c881628ae39e9d7f66a9740f08c0.jpg"
             };
             this._state.profilePage.posts.push(newPost);
-            this._callSubscriber(this._state); 
-        } else if (action.type === 'UPDATE_NEW_POST_TEXT') {
+            this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.textPost;
             this._callSubscriber(this._state);
-        } else if (action.type === 'ADD_NEW_MESSAGE') {
+        } else if (action.type === ADD_NEW_MESSAGE) {
             const newMessage = {
                 id: v1(),
                 textMessage: this.getState().dialogsPage.newMessageText
             };
             this._state.dialogsPage.messages.push(newMessage);
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE_NEW_MESSAGE') {
+        } else if (action.type === UPDATE_NEW_MESSAGE) {
             this._state.dialogsPage.newMessageText = action.textMessage;
             this._callSubscriber(this._state);
         }
+    }
+}
+
+
+export const addPostActionCreator = () => ({ type: ADD_POST })
+export const updateNewPostTextActionCreator = (text: string) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        textPost: text
+    }
+}
+
+export const addNewMessageActionCreator = () => ({ type: ADD_NEW_MESSAGE })
+export const updateNewMessageActionCreator = (text: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE,
+        textMessage: text
     }
 }
 

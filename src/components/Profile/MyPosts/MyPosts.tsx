@@ -1,5 +1,5 @@
 import React, { KeyboardEvent } from 'react'
-import { PostType } from '../../../redux/state';
+import { addPostActionCreator, PostType, updateNewPostTextActionCreator } from '../../../redux/state';
 import s from './MyPosts.module.scss'
 import Post from './Post/Post'
 
@@ -17,8 +17,8 @@ const MyPosts = ({ posts, dispatch, newPostText }: MyPostsPropsType) => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
             if (text.trim()) {
-                dispatch({type: 'ADD_POST'});
-                dispatch({type: 'UPDATE_NEW_POST_TEXT', textPost: ''});
+                dispatch(addPostActionCreator());
+                dispatch(updateNewPostTextActionCreator(''));
             }
         }
     }
@@ -26,12 +26,12 @@ const MyPosts = ({ posts, dispatch, newPostText }: MyPostsPropsType) => {
     const onChangeHandler = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            dispatch({type: 'UPDATE_NEW_POST_TEXT', textPost: text});
+            dispatch(updateNewPostTextActionCreator(text));
         }
     }
 
     const removePostHandler = () => {
-        dispatch({type: 'UPDATE_NEW_POST_TEXT', textPost: ''});
+        dispatch(updateNewPostTextActionCreator(''));
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {

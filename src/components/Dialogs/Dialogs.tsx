@@ -1,5 +1,5 @@
 import React, { KeyboardEvent } from 'react'
-import { DialogsPageType } from '../../redux/state'
+import { addNewMessageActionCreator, DialogsPageType, updateNewMessageActionCreator } from '../../redux/state'
 import { AddMessege } from './AddMessege/AddMessege'
 import { DialogItem } from './DialogItem/DialogItem'
 import s from './Dialogs.module.scss'
@@ -21,8 +21,8 @@ export const Dialogs = ({ dialogsState, dispatch }: DialogsPropsType) => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
             if (text.trim()) {
-                dispatch({type: 'ADD_NEW_MESSAGE'})
-                dispatch({type: 'UPDATE_NEW_MESSAGE', textMessage: ''})
+                dispatch(addNewMessageActionCreator())
+                dispatch(updateNewMessageActionCreator(''))
             }
         }
     }
@@ -30,7 +30,7 @@ export const Dialogs = ({ dialogsState, dispatch }: DialogsPropsType) => {
     const onChangeHandler = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            dispatch({type: 'UPDATE_NEW_MESSAGE', textMessage: text})
+            dispatch(updateNewMessageActionCreator(text))
         }
     }
 

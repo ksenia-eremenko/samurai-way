@@ -17,7 +17,6 @@ export const Profile = ({ profileState, dispatch }: ProfilePropsType) => {
         posts={profileState.posts}
         dispatch={dispatch}
         newPostText={profileState.newPostText}
-        // updateNewPostText={updateNewPostText}
       />
     </div>
   )
