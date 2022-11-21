@@ -18,7 +18,7 @@ const MyPosts = ({ posts, dispatch, newPostText }: MyPostsPropsType) => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
             if (text.trim()) {
-                dispatch(addPostActionCreator());
+                dispatch(addPostActionCreator(text));
                 dispatch(updateNewPostTextActionCreator(''));
             }
         }

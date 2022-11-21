@@ -1,11 +1,16 @@
 import {
     v1
 } from "uuid"
+import { ActionsTypes, DialogsPageType } from "./state";
 
 const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE";
 const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE";
 
-const dialogsReducer = (state: any, action: any) => {
+type AddNewMessageActionType = ReturnType<typeof addNewMessageActionCreator>
+type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageActionCreator>
+export type DialogsActionsTypes = AddNewMessageActionType | UpdateNewMessageActionType
+
+const dialogsReducer = (state: DialogsPageType, action: ActionsTypes) => {
     switch (action.type) {
         case ADD_NEW_MESSAGE:
             const newMessage = {
@@ -21,12 +26,17 @@ const dialogsReducer = (state: any, action: any) => {
             return state;
     }
 }
-export const addNewMessageActionCreator = () => ({ type: ADD_NEW_MESSAGE })
+export const addNewMessageActionCreator = (text: string) => {
+    return {
+        type: ADD_NEW_MESSAGE,
+        newMessageText: text
+    } as const
+}
 export const updateNewMessageActionCreator = (text: string) => {
     return {
         type: UPDATE_NEW_MESSAGE,
         textMessage: text
-    }
+    } as const
 }
 
 export default dialogsReducer;

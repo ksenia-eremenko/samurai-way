@@ -8,15 +8,11 @@ import { Navbar } from './components/Navbar/Navbar';
 import { News } from './components/News/News';
 import { Profile } from './components/Profile/Profile';
 import { Settings } from './components/Settings/Settings';
-import { RootStateType } from './redux/state';
+import store, { ActionsTypes, RootStateType } from './redux/state';
 
 type AppPropsType = {
   state: RootStateType
-  dispatch: (action: any) => void
-  // addNewMessage: () => void
-  // updateNewMessage: (textMessage: string) => void
-  // addPost: () => void
-  // updateNewPostText: (textPost: string) => void
+  dispatch: (action: ActionsTypes) => void
 }
 
 function App(props: AppPropsType) {
@@ -30,12 +26,12 @@ function App(props: AppPropsType) {
         <Routes>
           <Route path='/' element={<Profile
             profileState={state.profilePage}
-            dispatch={dispatch}
+            dispatch={dispatch.bind(store)}
           />} />
           <Route path='/profile' element={
             <Profile
               profileState={state.profilePage}
-              dispatch={dispatch}
+              dispatch={dispatch.bind(store)}
             />
           } />
           <Route path='/dialogs' element={

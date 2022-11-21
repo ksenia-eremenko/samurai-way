@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 import store, { RootStateType } from './redux/state';
 
-let renderEntireTree = (state: RootStateType) => {
+const renderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
             <App state={state} dispatch={store.dispatch.bind(store)}/>

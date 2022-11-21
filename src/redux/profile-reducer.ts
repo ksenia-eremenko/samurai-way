@@ -5,6 +5,10 @@ import {
 const ADD_POST = "ADD_POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
 
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
+export type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+
 const profileReducer = (state: any, action: any) => {
     switch (action.type) {
         case ADD_POST:
@@ -24,14 +28,17 @@ const profileReducer = (state: any, action: any) => {
     }
 }
 
-export const addPostActionCreator = () => ({
-    type: ADD_POST
-})
+export const addPostActionCreator = (text: string) => {
+    return {
+        type: ADD_POST,
+        newPostText: text
+    } as const
+}
 export const updateNewPostTextActionCreator = (text: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         textPost: text
-    }
+    } as const
 }
 
 

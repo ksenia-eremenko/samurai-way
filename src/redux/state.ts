@@ -44,8 +44,26 @@ export type StoreType = {
     _callSubscriber: (state: RootStateType) => void
     subscribe: (observer: (state: RootStateType) => void) => void
     getState: () => RootStateType
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsTypes) => void
 }
+
+export type addPostActionType = {
+    type: "ADD_POST"
+    newPostText: string
+}
+export type UpdateNewPostTextActionType = {
+    type: "UPDATE_NEW_POST_TEXT"
+    textPost: string
+}
+export type AddNewMessageActionType = {
+    type: "ADD_NEW_MESSAGE"
+    newMessageText: string
+}
+export type UpdateNewMessageActionType = {
+    type: "UPDATE_NEW_MESSAGE"
+    textMessage: string
+}
+export type ActionsTypes = addPostActionType | UpdateNewPostTextActionType | AddNewMessageActionType | UpdateNewMessageActionType;
 
 const store: StoreType = {
     _state: {
@@ -148,7 +166,7 @@ const store: StoreType = {
     subscribe(observer: (state: RootStateType) => void) {
         this._callSubscriber = observer;
     },
-    dispatch(action: any) {
+    dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
         this._state.sidebar = sidebarReducer(this._state.sidebar, action);

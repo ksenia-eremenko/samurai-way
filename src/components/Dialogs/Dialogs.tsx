@@ -1,6 +1,6 @@
 import React, { KeyboardEvent } from 'react'
 import { addNewMessageActionCreator, updateNewMessageActionCreator } from '../../redux/dialogs-reducer'
-import { DialogsPageType } from '../../redux/state'
+import { ActionsTypes, DialogsPageType } from '../../redux/state'
 import { AddMessege } from './AddMessege/AddMessege'
 import { DialogItem } from './DialogItem/DialogItem'
 import s from './Dialogs.module.scss'
@@ -8,7 +8,7 @@ import { Message } from './Message/Message'
 
 type DialogsPropsType = {
     dialogsState: DialogsPageType
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 export const Dialogs = ({ dialogsState, dispatch }: DialogsPropsType) => {
@@ -22,7 +22,7 @@ export const Dialogs = ({ dialogsState, dispatch }: DialogsPropsType) => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
             if (text.trim()) {
-                dispatch(addNewMessageActionCreator())
+                dispatch(addNewMessageActionCreator(text))
                 dispatch(updateNewMessageActionCreator(''))
             }
         }
