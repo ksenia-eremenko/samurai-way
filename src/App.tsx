@@ -48,7 +48,7 @@ function App(props: AppPropsType) {
             <Music />
           } />
           <Route path='/settings' element={
-            <Settings />
+            <Settings /> 
           } />
         </Routes>
       </div>
