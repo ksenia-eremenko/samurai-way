@@ -1,0 +1,19 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 15px;
+    .dialogs_items {
+
+    }
+    .messeges {
+        border: 1px solid #1F1D3A;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 15px;
+        .messages_items {
+
+        }
+    }
+}

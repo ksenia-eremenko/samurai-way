@@ -1,0 +1,6 @@
+.message_item {
+    padding: 10px;
+    &:nth-child(2n) {
+        background: rgba(#1F1D3A, 0.2);
+    }
+}
