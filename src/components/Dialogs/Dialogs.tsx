@@ -7,13 +7,10 @@ import { Message } from './Message/Message'
 
 type DialogsPropsType = {
     dialogsState: DialogsPageType
-    // addNewMessage: () => void
-    // updateNewMessage: (textMessage: string) => void
     dispatch: (action: any) => void
 }
 
-export const Dialogs = (props: DialogsPropsType) => {
-    const { dialogsState, dispatch } = props;
+export const Dialogs = ({ dialogsState, dispatch }: DialogsPropsType) => {
 
     const dialogsElement = dialogsState.dialogs.map(e => <DialogItem id={e.id} name={e.name} key={e.id} />);
     const messagesElement = dialogsState.messages.map(e => <Message id={e.id} textMessage={e.textMessage} key={e.id} />);
@@ -25,7 +22,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             let text = newPostElement.current.value;
             if (text.trim()) {
                 dispatch({type: 'ADD_NEW_MESSAGE'})
-                dispatch({type: 'UPDATE_NEW_MESSAGE', textMessage: text})
+                dispatch({type: 'UPDATE_NEW_MESSAGE', textMessage: ''})
             }
         }
     }
@@ -48,7 +45,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={s.dialogs_items}>{dialogsElement}</div>
             <div className={s.messeges}>
                 <div className={s.messages_items}>{messagesElement}</div>
-                <AddMessege addMessageHandler={addMessageHandler} onChangeHandler={onChangeHandler} value={props.dialogsState.newMessageText} onKeyPressHandler={onKeyPressHandler} newPostElement={newPostElement} />
+                <AddMessege addMessageHandler={addMessageHandler} onChangeHandler={onChangeHandler} value={dialogsState.newMessageText} onKeyPressHandler={onKeyPressHandler} newPostElement={newPostElement} />
             </div>
         </div>
     )

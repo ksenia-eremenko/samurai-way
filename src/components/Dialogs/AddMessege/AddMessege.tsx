@@ -9,8 +9,7 @@ type AddMessagePropsType = {
   newPostElement: RefObject<HTMLInputElement>
 }
 
-export const AddMessege = (props: AddMessagePropsType) => {
-  const { addMessageHandler, onChangeHandler, value, onKeyPressHandler, newPostElement } = props;
+export const AddMessege = ({ addMessageHandler, onChangeHandler, value, onKeyPressHandler, newPostElement }: AddMessagePropsType) => {
 
   return (
     <div className={s.add_messege}>

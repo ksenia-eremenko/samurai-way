@@ -6,14 +6,10 @@ import ProfileInfo from './ProfileInfo/ProfileInfo'
 
 type ProfilePropsType = {
   profileState: ProfilePageType
-  // addPost: () => void
-  // updateNewPostText: (textPost: string) => void
   dispatch: (action: any) => void
 }
 
-
-export const Profile = (props: ProfilePropsType) => {
-  const { profileState, dispatch } = props;
+export const Profile = ({ profileState, dispatch }: ProfilePropsType) => {
   return (
     <div className={s.profile}>
       <ProfileInfo />

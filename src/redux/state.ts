@@ -39,10 +39,6 @@ export type SidebarType = {}
 export type StoreType = {
     _state: RootStateType,
     _callSubscriber: (state: RootStateType) => void
-    addNewMessage: () => void
-    updateNewMessage: (textMessage: string) => void
-    addPost: () => void
-    updateNewPostText: (textPost: string) => void
     subscribe : (observer: (state: RootStateType) => void) => void
     getState : () => RootStateType
     dispatch : (action: any) => void
@@ -148,34 +144,6 @@ const store: StoreType = {
     },
     subscribe(observer: (state: RootStateType) => void) {
         this._callSubscriber = observer;
-    },
-
-    
-    addNewMessage() {
-        const newMessage = {
-            id: v1(),
-            textMessage: this.getState().dialogsPage.newMessageText
-        };
-        this._state.dialogsPage.messages.push(newMessage);
-        this._callSubscriber(this._state);
-    },
-    updateNewMessage(textMessage: string) {
-        this._state.dialogsPage.newMessageText = textMessage;
-        this._callSubscriber(this._state);
-    },
-    addPost() {
-        const newPost = {
-            id: v1(),
-            message: this._state.profilePage.newPostText,
-            likeCount: 4,
-            avatar: "https://vjoy.cc/wp-content/uploads/2020/10/2e91c881628ae39e9d7f66a9740f08c0.jpg"
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._callSubscriber(this._state);
-    },
-    updateNewPostText(textPost: string) {
-        this._state.profilePage.newPostText = textPost;
-        this._callSubscriber(this._state);
     },
     dispatch (action: any) {
         if (action.type === 'ADD_POST') {

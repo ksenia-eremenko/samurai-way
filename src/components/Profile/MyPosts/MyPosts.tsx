@@ -5,10 +5,8 @@ import Post from './Post/Post'
 
 type MyPostsPropsType = {
     posts: PostType[]
-    // addPost: () => void
     dispatch: (action: any) => void
     newPostText: string
-    // updateNewPostText: (textPost: string) => void
 }
 
 const MyPosts = ({ posts, dispatch, newPostText }: MyPostsPropsType) => {
