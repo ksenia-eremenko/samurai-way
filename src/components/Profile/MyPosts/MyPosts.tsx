@@ -11,8 +11,7 @@ type MyPostsPropsType = {
     // updateNewPostText: (textPost: string) => void
 }
 
-const MyPosts = (props: MyPostsPropsType) => {
-    const { posts, dispatch, newPostText } = props;
+const MyPosts = ({ posts, dispatch, newPostText }: MyPostsPropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
