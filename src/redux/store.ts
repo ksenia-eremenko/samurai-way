@@ -2,68 +2,59 @@ import { v1 } from "uuid"
 import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import { RootStateType, StoreType } from "./types";
 
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-    sidebar: SidebarType
-}
+// export type RootStateType = {
+//     profilePage: ProfilePageType
+//     dialogsPage: DialogsPageType
+//     sidebar: SidebarType
+// }
 
-export type DialogsPageType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessagesType>
-    newMessageText: string
-}
+// export type DialogsPageType = {
+//     dialogs: Array<DialogType>
+//     messages: Array<MessagesType>
+//     newMessageText: string
+// }
 
-export type ProfilePageType = {
-    posts: Array<PostType>
-    newPostText: string
-}
+// export type ProfilePageType = {
+//     posts: Array<PostType>
+//     newPostText: string
+// }
 
-export type DialogType = {
-    id: number,
-    name: string
-}
+// export type DialogType = {
+//     id: number,
+//     name: string
+// }
 
-export type MessagesType = {
-    id: string,
-    textMessage: string
-}
+// export type MessagesType = {
+//     id: string,
+//     textMessage: string
+// }
 
-export type PostType = {
-    id?: string,
-    message: string
-    likeCount: number
-    avatar: string
-}
+// export type PostType = {
+//     id?: string,
+//     message: string
+//     likeCount: number
+//     avatar: string
+// }
 
-export type SidebarType = {}
+// export type SidebarType = {}
 
-export type StoreType = {
-    _state: RootStateType,
-    _callSubscriber: (state: RootStateType) => void
-    subscribe: (observer: (state: RootStateType) => void) => void
-    getState: () => RootStateType
-    dispatch: (action: ActionsTypes) => void
-}
+// export type StoreType = {
+//     _state: RootStateType,
+//     _callSubscriber: (state: RootStateType) => void
+//     subscribe: (observer: (state: RootStateType) => void) => void
+//     getState: () => RootStateType
+//     dispatch: (action: ActionsTypes) => void
+// }
+// type AddNewMessageActionType = ReturnType<typeof addNewMessageActionCreator>
+// type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageActionCreator>
+// type AddPostActionType = ReturnType<typeof addPostActionCreator>
+// type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
+// export type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+// export type DialogsActionsTypes = AddNewMessageActionType | UpdateNewMessageActionType
 
-export type addPostActionType = {
-    type: "ADD_POST"
-    newPostText: string
-}
-export type UpdateNewPostTextActionType = {
-    type: "UPDATE_NEW_POST_TEXT"
-    textPost: string
-}
-export type AddNewMessageActionType = {
-    type: "ADD_NEW_MESSAGE"
-    newMessageText: string
-}
-export type UpdateNewMessageActionType = {
-    type: "UPDATE_NEW_MESSAGE"
-    textMessage: string
-}
-export type ActionsTypes = addPostActionType | UpdateNewPostTextActionType | AddNewMessageActionType | UpdateNewMessageActionType;
+// export type ActionsTypes = ProfileActionsTypes | DialogsActionsTypes;
 
 const store: StoreType = {
     _state: {
@@ -174,6 +165,7 @@ const store: StoreType = {
         this._callSubscriber(this._state);
     }
 }
+
 export default store;
 
 //  window.store = store;

@@ -1,15 +1,13 @@
 import {
     v1
 } from "uuid";
+import { ActionsTypes, ProfilePageType } from "./types";
 
 const ADD_POST = "ADD_POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
 
-type AddPostActionType = ReturnType<typeof addPostActionCreator>
-type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
-export type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType
-
-const profileReducer = (state: any, action: any) => {
+const profileReducer = (state: ProfilePageType, action: ActionsTypes) => {
+    
     switch (action.type) {
         case ADD_POST:
             const newPost = {

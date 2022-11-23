@@ -1,14 +1,10 @@
 import {
     v1
 } from "uuid"
-import { ActionsTypes, DialogsPageType } from "./state";
+import { ActionsTypes, DialogsPageType } from "./types";
 
 const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE";
 const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE";
-
-type AddNewMessageActionType = ReturnType<typeof addNewMessageActionCreator>
-type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageActionCreator>
-export type DialogsActionsTypes = AddNewMessageActionType | UpdateNewMessageActionType
 
 const dialogsReducer = (state: DialogsPageType, action: ActionsTypes) => {
     switch (action.type) {

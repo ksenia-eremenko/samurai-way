@@ -8,7 +8,8 @@ import { Navbar } from './components/Navbar/Navbar';
 import { News } from './components/News/News';
 import { Profile } from './components/Profile/Profile';
 import { Settings } from './components/Settings/Settings';
-import store, { ActionsTypes, RootStateType } from './redux/state';
+import store from './redux/store';
+import { ActionsTypes, RootStateType } from './redux/types';
 
 type AppPropsType = {
   state: RootStateType

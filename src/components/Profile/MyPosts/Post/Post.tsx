@@ -1,5 +1,5 @@
 import React from 'react'
-import { PostType } from '../../../../redux/state'
+import { PostType } from '../../../../redux/types'
 import s from './Post.module.scss'
 
 const Post = ({avatar, message, likeCount}: PostType) => {

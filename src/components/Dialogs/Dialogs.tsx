@@ -1,6 +1,6 @@
 import React, { KeyboardEvent } from 'react'
 import { addNewMessageActionCreator, updateNewMessageActionCreator } from '../../redux/dialogs-reducer'
-import { ActionsTypes, DialogsPageType } from '../../redux/state'
+import { ActionsTypes, DialogsPageType } from '../../redux/types'
 import { AddMessege } from './AddMessege/AddMessege'
 import { DialogItem } from './DialogItem/DialogItem'
 import s from './Dialogs.module.scss'
