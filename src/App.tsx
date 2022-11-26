@@ -8,7 +8,8 @@ import { Navbar } from './components/Navbar/Navbar';
 import { News } from './components/News/News';
 import { Profile } from './components/Profile/Profile';
 import { Settings } from './components/Settings/Settings';
-import store from './redux/store';
+import store from './redux/redux-store';
+// import store from './redux/store';
 import { ActionsTypes, RootStateType } from './redux/types';
 
 type AppPropsType = {
@@ -18,6 +19,7 @@ type AppPropsType = {
 
 function App(props: AppPropsType) {
   const { state, dispatch } = props;
+console.log(state);
 
   return (
     <div className="appWrapper">
@@ -26,17 +28,17 @@ function App(props: AppPropsType) {
       <div className="appWrapperContent">
         <Routes>
           <Route path='/' element={<Profile
-            profileState={state.profilePage}
+            profileState={state.profile}
             dispatch={dispatch.bind(store)}
           />} />
           <Route path='/profile' element={
             <Profile
-              profileState={state.profilePage}
+              profileState={state.profile}
               dispatch={dispatch.bind(store)}
             />
           } />
           <Route path='/dialogs' element={
-            <Dialogs dialogsState={state.dialogsPage} dispatch={dispatch} />
+            <Dialogs dialogsState={state.dialogs} dispatch={dispatch} />
           } />
           <Route path='/news' element={
             <News />

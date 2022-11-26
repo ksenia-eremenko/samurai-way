@@ -2,8 +2,8 @@ import { addNewMessageActionCreator, updateNewMessageActionCreator } from "./dia
 import { addPostActionCreator, updateNewPostTextActionCreator } from "./profile-reducer"
 
 export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
+    profile: ProfilePageType
+    dialogs: DialogsPageType
     sidebar: SidebarType
 }
 

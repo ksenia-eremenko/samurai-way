@@ -10,6 +10,7 @@ type ProfilePropsType = {
 }
 
 export const Profile = ({ profileState, dispatch }: ProfilePropsType) => {
+  // debugger;
   return (
     <div className={s.profile}>
       <ProfileInfo />

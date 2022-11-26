@@ -58,7 +58,7 @@ import { RootStateType, StoreType } from "./types";
 
 const store: StoreType = {
     _state: {
-        dialogsPage: {
+        dialogs: {
             dialogs: [
                 {
                     id: 1,
@@ -113,7 +113,7 @@ const store: StoreType = {
             ],
             newMessageText: ""
         },
-        profilePage: {
+        profile: {
             posts: [
                 {
                     id: v1(),
@@ -158,14 +158,14 @@ const store: StoreType = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action);
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.profile = profileReducer(this._state.profile, action);
+        this._state.dialogs = dialogsReducer(this._state.dialogs, action);
         this._state.sidebar = sidebarReducer(this._state.sidebar, action);
 
         this._callSubscriber(this._state);
     }
 }
 
-export default store;
+// export default store;
 
 //  window.store = store;
