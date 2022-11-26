@@ -8,14 +8,8 @@ import { Navbar } from './components/Navbar/Navbar';
 import { News } from './components/News/News';
 import { Profile } from './components/Profile/Profile';
 import { Settings } from './components/Settings/Settings';
-import { StoreType } from './redux/types';
 
-type AppPropsType = {
-  store: StoreType
-}
-
-function App(props: AppPropsType) {
-  const { store } = props;
+function App() {
 
   return (
     <div className="appWrapper">
@@ -23,28 +17,14 @@ function App(props: AppPropsType) {
       <Navbar />
       <div className="appWrapperContent">
         <Routes>
-          <Route path='/' element={
-            <Profile
-              store={store}
-            />
-          } />
-          <Route path='/profile' element={
-            <Profile
-              store={store}
-            />
-          } />
-          <Route path='/dialogs' element={
-            <DialogsContainer store={store} />
-          } />
+          <Route path='/' element={<Profile />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/dialogs' element={<DialogsContainer />} />
           <Route path='/news' element={
             <News />
           } />
-          <Route path='/music' element={
-            <Music />
-          } />
-          <Route path='/settings' element={
-            <Settings />
-          } />
+          <Route path='/music' element={<Music />} />
+          <Route path='/settings' element={<Settings />} />
         </Routes>
       </div>
     </div>

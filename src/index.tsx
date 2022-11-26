@@ -3,14 +3,15 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import store from './redux/redux-store';
-// import store from './redux/store';
 import { RootStateType } from './redux/types';
+import { Provider } from './StoreContext';
 
 const renderEntireTree = (state: RootStateType) => {
-
     ReactDOM.render(
         <BrowserRouter>
-            <App store={store} />
+            <Provider>
+                <App />
+            </Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );
