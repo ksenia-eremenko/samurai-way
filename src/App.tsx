@@ -1,25 +1,21 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Dialogs } from './components/Dialogs/Dialogs';
+import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 import { Header } from './components/Header/Header';
 import { Music } from './components/Music/Music';
 import { Navbar } from './components/Navbar/Navbar';
 import { News } from './components/News/News';
 import { Profile } from './components/Profile/Profile';
 import { Settings } from './components/Settings/Settings';
-import store from './redux/redux-store';
-// import store from './redux/store';
-import { ActionsTypes, RootStateType } from './redux/types';
+import { StoreType } from './redux/types';
 
 type AppPropsType = {
-  state: RootStateType
-  dispatch: (action: ActionsTypes) => void
+  store: StoreType
 }
 
 function App(props: AppPropsType) {
-  const { state, dispatch } = props;
-console.log(state);
+  const { store } = props;
 
   return (
     <div className="appWrapper">
@@ -27,18 +23,18 @@ console.log(state);
       <Navbar />
       <div className="appWrapperContent">
         <Routes>
-          <Route path='/' element={<Profile
-            profileState={state.profile}
-            dispatch={dispatch.bind(store)}
-          />} />
+          <Route path='/' element={
+            <Profile
+              store={store}
+            />
+          } />
           <Route path='/profile' element={
             <Profile
-              profileState={state.profile}
-              dispatch={dispatch.bind(store)}
+              store={store}
             />
           } />
           <Route path='/dialogs' element={
-            <Dialogs dialogsState={state.dialogs} dispatch={dispatch} />
+            <DialogsContainer store={store} />
           } />
           <Route path='/news' element={
             <News />
@@ -47,7 +43,7 @@ console.log(state);
             <Music />
           } />
           <Route path='/settings' element={
-            <Settings /> 
+            <Settings />
           } />
         </Routes>
       </div>

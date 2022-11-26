@@ -7,9 +7,10 @@ import store from './redux/redux-store';
 import { RootStateType } from './redux/types';
 
 const renderEntireTree = (state: RootStateType) => {
+
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} dispatch={store.dispatch.bind(store)}/>
+            <App store={store} />
         </BrowserRouter>,
         document.getElementById('root')
     );

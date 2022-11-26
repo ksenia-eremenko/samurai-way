@@ -1,38 +1,35 @@
 import React, { KeyboardEvent } from 'react'
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profile-reducer'
 import { PostType } from '../../../redux/types'
 import s from './MyPosts.module.scss'
 import Post from './Post/Post'
 
 type MyPostsPropsType = {
     posts: PostType[]
-    dispatch: (action: any) => void
     newPostText: string
+    addPost: () => void
+    updateNewPostText: (text: string) => void
 }
 
-const MyPosts = ({ posts, dispatch, newPostText }: MyPostsPropsType) => {
+const MyPosts = ({ posts, newPostText, addPost, updateNewPostText }: MyPostsPropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPostHandler = () => {
         if (newPostElement.current) {
-            let text = newPostElement.current.value;
-            if (text.trim()) {
-                dispatch(addPostActionCreator(text));
-                dispatch(updateNewPostTextActionCreator(''));
-            }
+            addPost();
+            updateNewPostText('');
         }
     }
 
     const onChangeHandler = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            dispatch(updateNewPostTextActionCreator(text));
+            updateNewPostText(text);
         }
     }
 
     const removePostHandler = () => {
-        dispatch(updateNewPostTextActionCreator(''));
+        updateNewPostText('');
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
