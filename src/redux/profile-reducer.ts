@@ -37,37 +37,34 @@ let initialState: ProfilePageType = {
 }
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
-    
+
+    let stateCopy = { ...state }
     switch (action.type) {
         case ADD_POST:
-            const newPost = {
-                id: v1(),
-                message: state.newPostText,
-                likeCount: 4,
-                avatar: "https://vjoy.cc/wp-content/uploads/2020/10/2e91c881628ae39e9d7f66a9740f08c0.jpg"
-            };
-            state.posts.push(newPost);
-            return state;
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.textPost;
-            return state;
+            return {
+                ...state,
+                posts: [...state.posts, {
+                    id: v1(),
+                    message: stateCopy.newPostText,
+                    likeCount: 4,
+                    avatar: "https://vjoy.cc/wp-content/uploads/2020/10/2e91c881628ae39e9d7f66a9740f08c0.jpg"
+                }]
+            }
+        case UPDATE_NEW_POST_TEXT: {
+            return { ...state, newPostText: action.textPost }
+        }
         default:
             return state;
     }
 }
 
-export const addPostActionCreator = (text: string) => {
-    return {
-        type: ADD_POST,
-        newPostText: text
-    } as const
-}
+export const addPostActionCreator = () => ({ type: ADD_POST } as const);
 export const updateNewPostTextActionCreator = (text: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         textPost: text
     } as const
-}
+};
 
 
 export default profileReducer;
