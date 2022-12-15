@@ -1,12 +1,22 @@
 import {
     v1
 } from "uuid"
-import { ActionsTypes, DialogsPageType } from "./types";
+import { ActionsTypes } from "./types";
 
 const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE";
 const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE";
 
-let initialState: DialogsPageType = {
+export type DialogType = {
+    id: number,
+    name: string
+}
+
+export type MessagesType = {
+    id: string,
+    textMessage: string
+}
+
+const initialState = {
     dialogs: [
         {
             id: 1,
@@ -32,7 +42,7 @@ let initialState: DialogsPageType = {
             id: 6,
             name: "Valera"
         }
-    ],
+    ] as DialogType[],
     messages: [
         {
             id: v1(),
@@ -58,12 +68,12 @@ let initialState: DialogsPageType = {
             id: v1(),
             textMessage: "textMessage #6"
         }
-    ],
+    ] as MessagesType[],
     newMessageText: ""
 }
+export type InitialStateType = typeof initialState
 
-
-const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes) => {
+const dialogsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_NEW_MESSAGE:
             return {

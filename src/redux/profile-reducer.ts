@@ -1,12 +1,19 @@
 import {
     v1
 } from "uuid";
-import { ActionsTypes, ProfilePageType } from "./types";
+import { ActionsTypes } from "./types";
 
 const ADD_POST = "ADD_POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
 
-let initialState: ProfilePageType = {
+export type PostType = {
+    id?: string,
+    message: string
+    likeCount: number
+    avatar: string
+}
+
+const initialState = {
     posts: [
         {
             id: v1(),
@@ -35,8 +42,9 @@ let initialState: ProfilePageType = {
     ],
     newPostText: ""
 }
+export type InitialStateType = typeof initialState
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
+const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
 
     let stateCopy = { ...state }
     switch (action.type) {

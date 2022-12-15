@@ -3,56 +3,26 @@ import { addPostActionCreator, updateNewPostTextActionCreator } from "./profile-
 import { followAC, setUsersAC, unFollowAC } from "./users-reducer"
 
 export type RootStateType = {
-    profile: ProfilePageType
-    dialogs: DialogsPageType
     sidebar: SidebarType
-    users: UsersPageType
+    // users: UsersPageType
 }
+// export type UsersPageType = {
+//     users: Array<UserType>
+// }
 
-export type DialogsPageType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessagesType>
-    newMessageText: string
-}
-export type UsersPageType = {
-    users: Array<UsersType>
-}
-
-export type UsersType = {
-    id: string
-    name: string
-    photos: {
-        small: string
-    }
-    followed: boolean
-    status: string
-    location: {
-        city: string
-        country: string
-    }
-}
-
-export type ProfilePageType = {
-    posts: Array<PostType>
-    newPostText: string
-}
-
-export type DialogType = {
-    id: number,
-    name: string
-}
-
-export type MessagesType = {
-    id: string,
-    textMessage: string
-}
-
-export type PostType = {
-    id?: string,
-    message: string
-    likeCount: number
-    avatar: string
-}
+// export type UserType = {
+//     id: string
+//     name: string
+//     photos: {
+//         small: string
+//     }
+//     followed: boolean
+//     status: string
+//     location: {
+//         city: string
+//         country: string
+//     }
+// }
 
 export type SidebarType = {}
 

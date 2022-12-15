@@ -7,14 +7,12 @@ import profileReducer from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer from "./users-reducer";
 
-let reducers = combineReducers({
+export const rootReducer = combineReducers({
     profile: profileReducer,
     dialogs: dialogsReducer,
     sidebar: sidebarReducer,
     users: usersReducer,
 
 });
-
-let store = createStore(reducers);
-window.store = store;
-export default store;
+export type AppStateType = ReturnType<typeof rootReducer>
+export const store = createStore(rootReducer);

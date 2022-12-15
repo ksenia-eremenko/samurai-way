@@ -1,18 +1,31 @@
-import {
-    v1
-} from "uuid"
-import { ActionsTypes, UsersPageType } from "./types";
+import { ActionsTypes } from "./types";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SETUSERS = "SETUSERS";
 
-let initialState: UsersPageType = {
+export type UserType = {
+    id: string
+    name: string
+    photos: {
+        small: string
+    }
+    followed: boolean
+    status: string
+    location: {
+        city: string
+        country: string
+    }
+}
+export type InitialStateType = {
+    users: Array<UserType>
+}
+let initialState: InitialStateType = {
     users: []
 }
 
 
-const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes) => {
+const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType    => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -35,6 +48,6 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes)
 }
 export const followAC = (userId: string) => ({ type: FOLLOW, userId } as const);
 export const unFollowAC = (userId: string) => ({ type: UNFOLLOW, userId } as const);
-export const setUsersAC = (users: any) => ({ type: SETUSERS, users } as const);
+export const setUsersAC = (users: Array<UserType>) => ({ type: SETUSERS, users } as const);
 
 export default usersReducer;

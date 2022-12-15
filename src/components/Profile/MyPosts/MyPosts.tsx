@@ -1,35 +1,28 @@
 import React, { KeyboardEvent } from 'react'
-import { PostType } from '../../../redux/types'
 import s from './MyPosts.module.scss'
+import { ProfilePropsType } from './MyPostsContainer';
 import Post from './Post/Post'
 
-type MyPostsPropsType = {
-    posts: PostType[]
-    newPostText: string
-    addPost: () => void
-    updateNewPostText: (text: string) => void
-}
 
-const MyPosts = ({ posts, newPostText, addPost, updateNewPostText }: MyPostsPropsType) => {
-
+const MyPosts = (props: ProfilePropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPostHandler = () => {
         if (newPostElement.current) {
-            addPost();
-            updateNewPostText('');
+            props.addPost();
+            props.updateNewPostText('');
         }
     }
 
     const onChangeHandler = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            updateNewPostText(text);
+            props.updateNewPostText(text);
         }
     }
 
     const removePostHandler = () => {
-        updateNewPostText('');
+        props.updateNewPostText('');
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -43,7 +36,7 @@ const MyPosts = ({ posts, newPostText, addPost, updateNewPostText }: MyPostsProp
             <div className={s.newPost}>
                 <textarea
                     placeholder='Введите текст'
-                    value={newPostText}
+                    value={props.profile.newPostText}
                     ref={newPostElement}
                     onChange={onChangeHandler}
                     onKeyPress={onKeyPressHandler}
@@ -58,7 +51,7 @@ const MyPosts = ({ posts, newPostText, addPost, updateNewPostText }: MyPostsProp
                 </div>
             </div>
             <div className={s.items}>
-                {posts.map(e => <Post message={e.message} key={e.id} likeCount={e.likeCount} avatar={e.avatar} />)}
+                {props.profile.posts.map(e => <Post message={e.message} key={e.id} likeCount={e.likeCount} avatar={e.avatar} />)}
             </div>
         </div>
     )

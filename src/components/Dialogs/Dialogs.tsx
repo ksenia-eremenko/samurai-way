@@ -1,28 +1,21 @@
 import React, { KeyboardEvent } from 'react'
-import { DialogsPageType } from '../../redux/types'
 import { AddMessege } from './AddMessege/AddMessege'
 import { DialogItem } from './DialogItem/DialogItem'
 import s from './Dialogs.module.scss'
+import { DialogsPropsType } from './DialogsContainer'
 import { Message } from './Message/Message'
 
-type DialogsPropsType = {
-    updateNewMessage: (text: string) => void
-    sendMessage: (text: string) => void
-    dialogsPage: DialogsPageType
-}
+export const Dialogs = ({updateNewMessage, sendMessage, dialogs }: DialogsPropsType) => {
 
-export const Dialogs = ({ updateNewMessage, sendMessage, dialogsPage }: DialogsPropsType) => {
-    let state = dialogsPage;
-
-    const dialogsElement = state.dialogs.map(e => <DialogItem id={e.id} name={e.name} key={e.id} />);
-    const messagesElement = state.messages.map(e => <Message id={e.id} textMessage={e.textMessage} key={e.id} />);
+    const dialogsElement = dialogs.dialogs.map(e => <DialogItem id={e.id} name={e.name} key={e.id} />);
+    const messagesElement = dialogs.messages.map(e => <Message id={e.id} textMessage={e.textMessage} key={e.id} />);
 
     let newPostElement = React.createRef<HTMLInputElement>();
     const addMessageHandler = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
             if (text.trim()) {
-                sendMessage('');
+                sendMessage();
             }
         }
     }
@@ -46,7 +39,7 @@ export const Dialogs = ({ updateNewMessage, sendMessage, dialogsPage }: DialogsP
                 <AddMessege
                     addMessageHandler={addMessageHandler}
                     onChangeHandler={onChangeHandler}
-                    value={state.newMessageText}
+                    value={dialogs.newMessageText}
                     onKeyPressHandler={onKeyPressHandler}
                     newPostElement={newPostElement}
                 />
