@@ -4,14 +4,11 @@ import { UsersPropsType } from './UsersContainer'
 import axios from 'axios';
 
 class Users extends React.Component<UsersPropsType, any> {
-    constructor(props: UsersPropsType) {
-        super(props);
-        if (this.props.users.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users')
-                .then(response => {
-                    this.props.setUsers(response.data.items)
-                });
-        }
+    componentDidMount(): void {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        .then(response => {
+            this.props.setUsers(response.data.items)
+        });
     }
     render() {
         return <div className={s.users}>
