@@ -3,29 +3,28 @@ import s from './Users.module.scss'
 import { UsersPropsType } from './UsersContainer'
 import axios from 'axios';
 
-class Users extends React.Component<UsersPropsType, any> {
-    constructor(props: UsersPropsType) {
-        super(props);
-        if (this.props.users.users.length === 0) {
+export const Users = (props: UsersPropsType) => {
+    const getUsers = () => {
+        if (props.users.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
                 .then(response => {
-                    this.props.setUsers(response.data.items)
+                    props.setUsers(response.data.items)
                 });
         }
     }
-    render() {
-        return <div className={s.users}>
-            {/* <button onClick={this.getUsers}>Get Users</button> */}
+    return (
+        <div className={s.users}>
+            <button onClick={getUsers}>Get Users</button>
             <div className={s.items}>
-                {this.props.users.users.map(e => <div className={s.item} key={e.id}>
+                {props.users.users.map(e => <div className={s.item} key={e.id}>
                     <div className={s.left}>
                         <div className={s.image}>
                             <img src={(e.photos.small) ? e.photos.small : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-nQUCCa0BtWUXSIdVH803tKJvfL7hFrGXTXosMvver42iMR1DZUsNliYCAd-MTqhJjLM&usqp=CAU'} alt="" />
                         </div>
                         <div className={s.followed}>
                             {(e.followed)
-                                ? <button onClick={() => { this.props.unFollow(e.id) }}>Unfollow</button>
-                                : <button onClick={() => { this.props.follow(e.id) }}>Follow</button>
+                                ? <button onClick={() => { props.unFollow(e.id) }}>Unfollow</button>
+                                : <button onClick={() => { props.follow(e.id) }}>Follow</button>
                             }
                         </div>
                     </div>
@@ -43,6 +42,5 @@ class Users extends React.Component<UsersPropsType, any> {
                 )}
             </div>
         </div>
-    }
+    )
 }
-export default Users
