@@ -3,16 +3,12 @@ import s from './Users.module.scss'
 import { UsersPropsType } from './UsersContainer'
 import axios from 'axios';
 
-
 export const Users = (props: UsersPropsType) => {
     if (props.users.users.length === 0) {
-
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then(response => {
                 props.setUsers(response.data.items)
             });
-
-
     }
     return (
         <div className={s.users}>
