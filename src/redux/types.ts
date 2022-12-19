@@ -1,6 +1,6 @@
 import { addNewMessageActionCreator, updateNewMessageActionCreator } from "./dialogs-reducer"
 import { addPostActionCreator, updateNewPostTextActionCreator } from "./profile-reducer"
-import { followAC, setCurrentPageAC, setTotalUsersAC, setUsersAC, unFollowAC } from "./users-reducer"
+import { followAC, setCurrentPageAC, setTotalUsersAC, setUsersAC, toggleIsFetchingAC, unFollowAC } from "./users-reducer"
 
 export type RootStateType = {
     sidebar: SidebarType
@@ -23,8 +23,9 @@ type UnFollowACType = ReturnType<typeof unFollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
 type SetCurrentPageType = ReturnType<typeof setCurrentPageAC>
 type SetTotalUsersType = ReturnType<typeof setTotalUsersAC>
+type SetIsFetchingType = ReturnType<typeof toggleIsFetchingAC>
 export type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType
 export type DialogsActionsTypes = AddNewMessageActionType | UpdateNewMessageActionType
-export type UsersActionsTypes = FollowACType | UnFollowACType | SetUsersACType
+export type UsersActionsTypes = FollowACType | UnFollowACType | SetUsersACType | SetIsFetchingType | SetCurrentPageType | SetTotalUsersType
 
-export type ActionsTypes = ProfileActionsTypes | DialogsActionsTypes | UsersActionsTypes | SetCurrentPageType | SetTotalUsersType
+export type ActionsTypes = ProfileActionsTypes | DialogsActionsTypes | UsersActionsTypes
