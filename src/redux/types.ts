@@ -1,29 +1,10 @@
 import { addNewMessageActionCreator, updateNewMessageActionCreator } from "./dialogs-reducer"
 import { addPostActionCreator, updateNewPostTextActionCreator } from "./profile-reducer"
-import { followAC, setUsersAC, unFollowAC } from "./users-reducer"
+import { followAC, setCurrentPageAC, setTotalUsersAC, setUsersAC, unFollowAC } from "./users-reducer"
 
 export type RootStateType = {
     sidebar: SidebarType
-    // users: UsersPageType
 }
-// export type UsersPageType = {
-//     users: Array<UserType>
-// }
-
-// export type UserType = {
-//     id: string
-//     name: string
-//     photos: {
-//         small: string
-//     }
-//     followed: boolean
-//     status: string
-//     location: {
-//         city: string
-//         country: string
-//     }
-// }
-
 export type SidebarType = {}
 
 export type StoreType = {
@@ -40,8 +21,10 @@ type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCrea
 type FollowACType = ReturnType<typeof followAC>
 type UnFollowACType = ReturnType<typeof unFollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
+type SetCurrentPageType = ReturnType<typeof setCurrentPageAC>
+type SetTotalUsersType = ReturnType<typeof setTotalUsersAC>
 export type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType
 export type DialogsActionsTypes = AddNewMessageActionType | UpdateNewMessageActionType
 export type UsersActionsTypes = FollowACType | UnFollowACType | SetUsersACType
 
-export type ActionsTypes = ProfileActionsTypes | DialogsActionsTypes | UsersActionsTypes
+export type ActionsTypes = ProfileActionsTypes | DialogsActionsTypes | UsersActionsTypes | SetCurrentPageType | SetTotalUsersType

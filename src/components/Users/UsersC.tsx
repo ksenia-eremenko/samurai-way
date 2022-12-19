@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export const Users = (props: UsersPropsType) => {
     const getUsers = () => {
-        if (props.users.users.length === 0) {
+        if (props.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
                 .then(response => {
                     props.setUsers(response.data.items)
@@ -16,7 +16,7 @@ export const Users = (props: UsersPropsType) => {
         <div className={s.users}>
             <button onClick={getUsers}>Get Users</button>
             <div className={s.items}>
-                {props.users.users.map(e => <div className={s.item} key={e.id}>
+                {props.users.map(e => <div className={s.item} key={e.id}>
                     <div className={s.left}>
                         <div className={s.image}>
                             <img src={(e.photos.small) ? e.photos.small : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-nQUCCa0BtWUXSIdVH803tKJvfL7hFrGXTXosMvver42iMR1DZUsNliYCAd-MTqhJjLM&usqp=CAU'} alt="" />

@@ -4,17 +4,42 @@ import { UsersPropsType } from './UsersContainer'
 import axios from 'axios';
 
 class Users extends React.Component<UsersPropsType, any> {
+
     componentDidMount(): void {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-        .then(response => {
-            this.props.setUsers(response.data.items)
-        });
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUserCount(response.data.totalCount)
+            });
+    }
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            });
     }
     render() {
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
         return <div className={s.users}>
-            {/* <button onClick={this.getUsers}>Get Users</button> */}
+            <div className={s.pagination}>
+                {pages.map((p, i) => {
+                    return (
+                        <span
+                            key={i}
+                            className={this.props.currentPage === p ? s.activePage : this.props.currentPage === p+1 ? '' + s.prev : this.props.currentPage === p-1 ? '' + s.next : ''}
+                            onClick={() => this.onPageChanged(p)}
+                        >{p}</span>
+                    )
+                })}
+            </div>
             <div className={s.items}>
-                {this.props.users.users.map(e => <div className={s.item} key={e.id}>
+                {this.props.users.map(e => <div className={s.item} key={e.id}>
                     <div className={s.left}>
                         <div className={s.image}>
                             <img src={(e.photos.small) ? e.photos.small : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-nQUCCa0BtWUXSIdVH803tKJvfL7hFrGXTXosMvver42iMR1DZUsNliYCAd-MTqhJjLM&usqp=CAU'} alt="" />
