@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { ComponentType } from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import { AppStateType } from '../../redux/redux-store';
-import { followAC, InitialStateType, setCurrentPageAC, setTotalUsersAC, setUsersAC, toggleIsFetchingAC, unFollowAC, UserType } from '../../redux/users-reducer';
+import { follow, InitialStateType, setCurrentPage, setTotalUserCount, setUsers, toggleIsFetching, unFollow, UserType } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 
@@ -38,7 +37,7 @@ class UsersAPIComponent extends React.Component<any, ComponentType<never>> {
     render() {
         return (
             <>
-            {this.props.isFetching ? <Preloader /> : ''}
+                {this.props.isFetching ? <Preloader /> : ''}
                 <Users
                     totalUsersCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
@@ -63,27 +62,8 @@ let mapStateToProps = (state: AppStateType): InitialStateType => {
         isFetching: state.users.isFetching
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    return {
-        follow: (userId: string) => {
-            dispatch(followAC(userId));
-        },
-        unFollow: (userId: string) => {
-            dispatch(unFollowAC(userId));
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUserCount: (totalCount: number) => {
-            dispatch(setTotalUsersAC(totalCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+export const UsersContainer = connect(mapStateToProps, {
+    follow, unFollow, setUsers,
+    setCurrentPage, setTotalUserCount, toggleIsFetching
+})(UsersAPIComponent);
