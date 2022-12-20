@@ -1,5 +1,5 @@
 import { addNewMessageActionCreator, updateNewMessageActionCreator } from "./dialogs-reducer"
-import { addPostActionCreator, updateNewPostTextActionCreator } from "./profile-reducer"
+import { addPostActionCreator, setUserProfile, updateNewPostTextActionCreator } from "./profile-reducer"
 import { follow, setCurrentPage, setTotalUserCount, setUsers, toggleIsFetching, unFollow } from "./users-reducer"
 
 export type RootStateType = {
@@ -17,6 +17,7 @@ export type StoreType = {
 type AddNewMessageActionType = ReturnType<typeof addNewMessageActionCreator>
 type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageActionCreator>
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type SetUserProfileType = ReturnType<typeof setUserProfile>
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 type FollowACType = ReturnType<typeof follow>
 type UnFollowACType = ReturnType<typeof unFollow>
@@ -25,7 +26,7 @@ type SetCurrentPageType = ReturnType<typeof setCurrentPage>
 type SetTotalUsersType = ReturnType<typeof setTotalUserCount>
 type SetIsFetchingType = ReturnType<typeof toggleIsFetching>
 
-export type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+export type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileType
 export type DialogsActionsTypes = AddNewMessageActionType | UpdateNewMessageActionType
 export type UsersActionsTypes = FollowACType | UnFollowACType | SetUsersACType | SetIsFetchingType | SetCurrentPageType | SetTotalUsersType
 

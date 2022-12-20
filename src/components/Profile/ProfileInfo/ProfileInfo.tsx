@@ -1,24 +1,43 @@
 import React from 'react'
+import { ProfileDataType } from '../../../redux/profile-reducer';
+import Preloader from '../../common/Preloader/Preloader'
 import s from './ProfileInfo.module.scss'
 
-const ProfileInfo = () => {
-  return (
-    <div className={s.profileInfoWrapper}>
+type ProfileInfoType = {
+    profile: ProfileDataType
+}
+
+const ProfileInfo = (props: ProfileInfoType) => {
+    console.log(props.profile);
+
+    if (!props.profile) {
+        return <Preloader />
+    }
+    return (
+        <div className={s.profileInfoWrapper}>
             <div className={s.photo}>
                 <img src="https://kartinkin.net/uploads/posts/2021-04/thumbs/1617584988_23-p-fon-dlya-saita-temnii-23.jpg" alt="" />
             </div>
             <div className={s.profileInfo}>
                 <div className={s.image}>
-                    <img src="https://kartinkin.net/uploads/posts/2022-03/1646322729_4-kartinkin-net-p-derzkie-kartinki-na-avu-4.jpg" alt="" />
+                    <img src={props.profile.photos.small} alt="" />
                 </div>
                 <div className={s.info}>
-                    <div className={s.item}>Lucile Kärt</div>
-                    <div className={s.item}>01.01.1996</div>
-                    <div className={`${s.item} ${s.country}`}>Great Britain</div>
+                    <div className={s.left}>
+                        <div className={s.item}>{props.profile.fullName}</div>
+                        <div className={s.item}>{props.profile.aboutMe}</div>
+                        <div className={`${s.item} ${s.quote}`}>{props.profile.lookingForAJobDescription}</div>
+                    </div>
+                    <div className={s.right}>
+                        <div className={s.jobStatus}>
+                            {(props.profile.lookingForAJob) ? <span className={s.red}></span> : <span className={s.green}></span> }
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default ProfileInfo

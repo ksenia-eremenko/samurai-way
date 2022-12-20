@@ -1,6 +1,7 @@
 import React from 'react'
 import { UserType } from '../../redux/users-reducer'
 import s from './Users.module.scss'
+import { NavLink } from 'react-router-dom'
 
 type UsersType = {
     users: Array<UserType>
@@ -33,9 +34,11 @@ let Users = (props: UsersType) => {
         <div className={s.items}>
             {props.users.map(e => <div className={s.item} key={e.id}>
                 <div className={s.left}>
-                    <div className={s.image}>
-                        <img src={(e.photos.small) ? e.photos.small : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-nQUCCa0BtWUXSIdVH803tKJvfL7hFrGXTXosMvver42iMR1DZUsNliYCAd-MTqhJjLM&usqp=CAU'} alt="" />
-                    </div>
+                    <NavLink to={'/profile/' + e.id} className="link">
+                        <div className={s.image}>
+                            <img src={(e.photos.small) ? e.photos.small : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-nQUCCa0BtWUXSIdVH803tKJvfL7hFrGXTXosMvver42iMR1DZUsNliYCAd-MTqhJjLM&usqp=CAU'} alt="" />
+                        </div>
+                    </NavLink>
                     <div className={s.followed}>
                         {(e.followed)
                             ? <button onClick={() => { props.unFollow(e.id) }}>Unfollow</button>

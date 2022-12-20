@@ -7,22 +7,22 @@ export const Navbar = () => {
     <div className={s.navbar}>
       <nav className={s.navigation}>
         <div className={s.item}>
-          <NavLink to='/profile' className="link">Profile</NavLink>
+          <NavLink to='/profile/' className='link'>Profile</NavLink>
         </div>
         <div className={s.item}>
-          <NavLink to='/dialogs' className="link">Messages</NavLink>
+          <NavLink to='/dialogs/' className='link'>Messages</NavLink>
         </div>
         <div className={s.item}>
-          <NavLink to='/users' className="link">Users</NavLink>
+          <NavLink to='/users' className='link'>Users</NavLink>
         </div>
         <div className={s.item}>
-          <NavLink to='/news' className="link">News</NavLink>
+          <NavLink to='/news' className='link'>News</NavLink>
         </div>
         <div className={s.item}>
-          <NavLink to='/music' className="link">Music</NavLink>
+          <NavLink to='/music' className='link'>Music</NavLink>
         </div>
         <div className={s.item}>
-          <NavLink to='/settings' className="link">Settings</NavLink>
+          <NavLink to='/settings' className='link'>Settings</NavLink>
         </div>
       </nav>
     </div>
