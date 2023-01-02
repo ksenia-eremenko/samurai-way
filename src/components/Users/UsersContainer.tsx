@@ -18,7 +18,8 @@ type MapDispatchToPropsType = {
 class UsersAPIComponent extends React.Component<any, ComponentType<never>> {
     componentDidMount(): void {
         this.props.toggleIsFetching(true);
-        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        userAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(data.items)
                 this.props.setTotalUserCount(data.totalCount)
@@ -27,7 +28,8 @@ class UsersAPIComponent extends React.Component<any, ComponentType<never>> {
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber)
-        userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+        userAPI.getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(data.items)
             });
@@ -66,6 +68,6 @@ let mapStateToProps = (state: AppStateType): InitialStateType => {
 
 export const UsersContainer = connect(mapStateToProps, {
     follow, unFollow, setUsers,
-    setCurrentPage, setTotalUserCount, toggleIsFetching, 
+    setCurrentPage, setTotalUserCount, toggleIsFetching,
     toggleIsFollowingProgress
 })(UsersAPIComponent);

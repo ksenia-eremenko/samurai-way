@@ -12,8 +12,6 @@ class HeaderContainer extends React.Component {
       withCredentials: true
     })
       .then(response => {
-        console.log(response);
-        
         if (response.data.resultCode === 0) {
           let { id, email, login } = response.data.data
           // @ts-ignore
