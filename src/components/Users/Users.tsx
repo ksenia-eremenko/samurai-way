@@ -10,12 +10,13 @@ type UsersType = {
     totalUsersCount: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
-    follow: (userId: string) => void
-    unFollow: (userId: string) => void
-    toggleIsFollowingProgress: (followingInProgress: boolean, id: string) => void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    toggleIsFollowingProgress: (followingInProgress: boolean, userId: number) => void
     followingInProgress: Array<number>
 }
 let Users = (props: UsersType) => {
+    
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
     let pages = []
@@ -37,14 +38,14 @@ let Users = (props: UsersType) => {
         <div className={s.items}>
             {props.users.map(e => <div className={s.item} key={e.id}>
                 <div className={s.left}>
-                    <NavLink to={'/profile/' + e.id} className="link">
+                    <NavLink to={'/profile/' + e.id} className={s.link}>
                         <div className={s.image}>
                             <img src={(e.photos.small) ? e.photos.small : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-nQUCCa0BtWUXSIdVH803tKJvfL7hFrGXTXosMvver42iMR1DZUsNliYCAd-MTqhJjLM&usqp=CAU'} alt="" />
                         </div>
                     </NavLink>
                     <div className={s.followed}>
-                        {(e.followed)
-                            ? <button disabled={props.followingInProgress.some(id => String(id) === e.id)} onClick={() => {
+                        {e.followed
+                            ? <button disabled={props.followingInProgress.some(id => id === e.id)} onClick={() => {
                                 props.toggleIsFollowingProgress(true, e.id)
                                 userAPI.getUnFollow(e.id)
                                     .then(data => {
@@ -54,7 +55,7 @@ let Users = (props: UsersType) => {
                                         props.toggleIsFollowingProgress(false, e.id)
                                     });
                             }}>Unfollow</button>
-                            : <button disabled={props.followingInProgress.some(id => String(id) === e.id)} onClick={() => {
+                            : <button disabled={props.followingInProgress.some(id => id === e.id)} onClick={() => {
                                 props.toggleIsFollowingProgress(true, e.id)
                                 userAPI.getFollow(e.id)
                                     .then(data => {

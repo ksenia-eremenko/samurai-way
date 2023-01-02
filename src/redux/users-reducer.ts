@@ -9,7 +9,7 @@ const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 
 export type UserType = {
-    id: string
+    id: number
     name: string
     photos: {
         small: string
@@ -70,16 +70,17 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
             }
         case TOGGLE_IS_FOLLOWING_PROGRESS:
             return {
-                ...state, followingInProgress: action.followingInProgress
+                ...state,
+                followingInProgress: action.followingInProgress
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         default:
             return state;
     }
 }
-export const follow = (userId: string) => ({ type: FOLLOW, userId } as const);
-export const unFollow = (userId: string) => ({ type: UNFOLLOW, userId } as const);
+export const follow = (userId: number) => ({ type: FOLLOW, userId } as const);
+export const unFollow = (userId: number) => ({ type: UNFOLLOW, userId } as const);
 export const setUsers = (users: Array<UserType>) => ({ type: SETUSERS, users } as const);
 export const setCurrentPage = (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage } as const);
 export const setTotalUserCount = (totalUserCount: number) => ({ type: SET_TOTAL_USERS_COUNT, totalUserCount } as const);

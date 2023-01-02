@@ -97,6 +97,18 @@
                         object-fit: cover;
                     }
                 }
+                .followed {
+                    button {
+                        background: #1F1D3A;
+                        border: 0;
+                        color: #fff;
+                        padding: 5px 10px;
+                        border-radius: 3px;
+                        &:disabled {
+                            background: rgb(87, 87, 87);
+                        }
+                    }
+                }
             }
 
             .right {

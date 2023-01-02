@@ -7,8 +7,8 @@ import Preloader from '../common/Preloader/Preloader';
 import { userAPI } from '../../api/Api';
 
 type MapDispatchToPropsType = {
-    follow: (userId: string) => void
-    unFollow: (userId: string) => void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
     setUsers: (users: Array<UserType>) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUserCount: (totalCount: number) => void
