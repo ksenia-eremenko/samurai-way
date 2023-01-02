@@ -2,6 +2,7 @@ import React from 'react'
 import { UserType } from '../../redux/users-reducer'
 import s from './Users.module.scss'
 import { NavLink } from 'react-router-dom'
+import { userAPI } from '../../api/Api'
 
 type UsersType = {
     users: Array<UserType>
@@ -11,6 +12,8 @@ type UsersType = {
     onPageChanged: (pageNumber: number) => void
     follow: (userId: string) => void
     unFollow: (userId: string) => void
+    toggleIsFollowingProgress: (followingInProgress: boolean, id: string) => void
+    followingInProgress: Array<number>
 }
 let Users = (props: UsersType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -41,8 +44,26 @@ let Users = (props: UsersType) => {
                     </NavLink>
                     <div className={s.followed}>
                         {(e.followed)
-                            ? <button onClick={() => { props.unFollow(e.id) }}>Unfollow</button>
-                            : <button onClick={() => { props.follow(e.id) }}>Follow</button>
+                            ? <button disabled={props.followingInProgress.some(id => String(id) === e.id)} onClick={() => {
+                                props.toggleIsFollowingProgress(true, e.id)
+                                userAPI.getUnFollow(e.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
+                                            props.unFollow(e.id)
+                                        }
+                                        props.toggleIsFollowingProgress(false, e.id)
+                                    });
+                            }}>Unfollow</button>
+                            : <button disabled={props.followingInProgress.some(id => String(id) === e.id)} onClick={() => {
+                                props.toggleIsFollowingProgress(true, e.id)
+                                userAPI.getFollow(e.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
+                                            props.follow(e.id)
+                                        }
+                                        props.toggleIsFollowingProgress(false, e.id)
+                                    });
+                            }}>Follow</button>
                         }
                     </div>
                 </div>

@@ -32,6 +32,11 @@
                 top: 0.1em;
             }
         }
+        .next:last-child {
+            &::before {
+                content: none;
+            }
+        }
 
         .prev:not(:first-child) {
             margin-left: 20px;
