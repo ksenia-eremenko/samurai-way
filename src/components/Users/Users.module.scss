@@ -103,9 +103,11 @@
                         border: 0;
                         color: #fff;
                         padding: 5px 10px;
+                        cursor: pointer;
                         border-radius: 3px;
                         &:disabled {
                             background: rgb(87, 87, 87);
+                            cursor: not-allowed;
                         }
                     }
                 }

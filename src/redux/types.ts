@@ -1,7 +1,7 @@
 import { setAuthUserData } from "./auth-reducer"
 import { addNewMessageActionCreator, updateNewMessageActionCreator } from "./dialogs-reducer"
 import { addPostActionCreator, setUserProfile, updateNewPostTextActionCreator } from "./profile-reducer"
-import { follow, setCurrentPage, setTotalUserCount, setUsers, toggleIsFetching, toggleIsFollowingProgress, unFollow } from "./users-reducer"
+import { followSucces, setCurrentPage, setTotalUserCount, setUsers, toggleIsFetching, toggleIsFollowingProgress, unFollowSucces } from "./users-reducer"
 
 export type RootStateType = {
     sidebar: SidebarType
@@ -20,8 +20,8 @@ type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageActionCreato
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type SetUserProfileType = ReturnType<typeof setUserProfile>
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
-type FollowACType = ReturnType<typeof follow>
-type UnFollowACType = ReturnType<typeof unFollow>
+type FollowACType = ReturnType<typeof followSucces>
+type UnFollowACType = ReturnType<typeof unFollowSucces>
 type SetUsersACType = ReturnType<typeof setUsers>
 type SetCurrentPageType = ReturnType<typeof setCurrentPage>
 type SetTotalUsersType = ReturnType<typeof setTotalUserCount>
