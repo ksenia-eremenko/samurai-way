@@ -1,7 +1,7 @@
 import {
     v1
 } from "uuid";
-import { profileAPI } from "../api/Api";
+import { userAPI } from "../api/Api";
 import { ActionsTypes } from "./types";
 
 const ADD_POST = "ADD_POST";
@@ -113,15 +113,11 @@ export const setUserProfile = (profile: ProfileDataType) => {
         profile
     } as const
 };
-
-export const getUserProfile = (userId: number) => {
-    return (dispatch: any) => {
-        profileAPI.getProfileData(userId)
-        .then(data => {
-            dispatch(setUserProfile(data));
+export const getUserProfile = (userId: number) => (dispatch: any) => {
+    userAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfile(response.data))
         });
-    }
-}
-
+};
 
 export default profileReducer;

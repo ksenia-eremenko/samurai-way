@@ -26,23 +26,15 @@ export const userAPI = {
             .then(response => {
                 return response.data
             })
+    },
+    getProfile(userId: number) {
+        return instance.get(`profile/` + userId)
     }
 }
 
 export const authAPI = {
     getAuth() {
         return instance.get(`auth/me`)
-            .then(response => {
-                return response.data
-            });
-    }
-}
-export const profileAPI = {
-    getProfileData(userId: number) {
-        return instance.get(`profile/` + userId)
-            .then(response => {
-                return response.data
-            });
     }
 }
 
