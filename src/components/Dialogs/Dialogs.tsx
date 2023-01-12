@@ -1,12 +1,12 @@
 import React, { KeyboardEvent } from 'react'
+import { Navigate } from 'react-router-dom'
 import { AddMessege } from './AddMessege/AddMessege'
 import { DialogItem } from './DialogItem/DialogItem'
 import s from './Dialogs.module.scss'
 import { DialogsPropsType } from './DialogsContainer'
 import { Message } from './Message/Message'
 
-export const Dialogs = ({updateNewMessage, sendMessage, dialogs }: DialogsPropsType) => {
-
+export const Dialogs = ({updateNewMessage, sendMessage, dialogs, isAuth }: DialogsPropsType) => {
     const dialogsElement = dialogs.dialogs.map(e => <DialogItem id={e.id} name={e.name} key={e.id} />);
     const messagesElement = dialogs.messages.map(e => <Message id={e.id} textMessage={e.textMessage} key={e.id} />);
 
@@ -31,6 +31,7 @@ export const Dialogs = ({updateNewMessage, sendMessage, dialogs }: DialogsPropsT
         }
     }
 
+    if (!isAuth) return <Navigate to={'/login'} />
     return (
         <div className={s.dialogs}>
             <div className={s.dialogs_items}>{dialogsElement}</div>
