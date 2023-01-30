@@ -9,7 +9,7 @@ import { Navbar } from './components/Navbar/Navbar';
 import { News } from './components/News/News';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import { Settings } from './components/Settings/Settings';
-import { UsersContainer } from './components/Users/UsersContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 function App() {
 
