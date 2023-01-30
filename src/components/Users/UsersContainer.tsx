@@ -4,6 +4,7 @@ import { AppStateType } from '../../redux/redux-store';
 import { follow, getUsers, InitialStateType, setCurrentPage, toggleIsFollowingProgress, unfollow, UserType } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import { WithAuthRedirect } from '../../hoc/withAuthRedirect';
 
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
@@ -52,6 +53,6 @@ let mapStateToProps = (state: AppStateType): InitialStateType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, {
+export const UsersContainer = WithAuthRedirect(connect(mapStateToProps, {
     follow, unfollow, setCurrentPage, toggleIsFollowingProgress, getUsers
-})(UsersAPIComponent);
+})(UsersAPIComponent));
