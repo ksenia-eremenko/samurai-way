@@ -1,6 +1,7 @@
 import React from 'react'
 import { ProfileDataType } from '../../../redux/profile-reducer';
 import Preloader from '../../common/Preloader/Preloader'
+import ProfileStatus from '../ProfileStatus/ProfileStatus';
 import s from './ProfileInfo.module.scss'
 
 type ProfileInfoType = {
@@ -23,13 +24,13 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 <div className={s.info}>
                     <div className={s.left}>
                         <div className={s.item}>{props.profile.fullName}</div>
-                        <div className={s.item}>{props.profile.aboutMe}</div>
                         <div className={`${s.item} ${s.quote}`}>{props.profile.lookingForAJobDescription}</div>
+                        <ProfileStatus status={'Hello my friends'} />
                     </div>
                     <div className={s.right}>
                         <div className={s.jobStatus}>
-                            {(props.profile.lookingForAJob) ? <span className={s.red}></span> : <span className={s.green}></span> }
-                            
+                            {(props.profile.lookingForAJob) ? <span className={s.red}></span> : <span className={s.green}></span>}
+
                         </div>
                     </div>
                 </div>
