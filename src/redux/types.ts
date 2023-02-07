@@ -1,6 +1,6 @@
 import { setAuthUserData } from "./auth-reducer"
 import { addNewMessageActionCreator, updateNewMessageActionCreator } from "./dialogs-reducer"
-import { addPostActionCreator, setUserProfile, updateNewPostTextActionCreator } from "./profile-reducer"
+import { addPostActionCreator, setUserProfile, setUserStatus, updateNewPostTextActionCreator } from "./profile-reducer"
 import { followSucces, setCurrentPage, setTotalUserCount, setUsers, toggleIsFetching, toggleIsFollowingProgress, unFollowSucces } from "./users-reducer"
 
 export type RootStateType = {
@@ -18,6 +18,7 @@ export type StoreType = {
 type AddNewMessageActionType = ReturnType<typeof addNewMessageActionCreator>
 type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageActionCreator>
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type setUserStatusType = ReturnType<typeof setUserStatus>
 type SetUserProfileType = ReturnType<typeof setUserProfile>
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 type FollowACType = ReturnType<typeof followSucces>
@@ -29,7 +30,7 @@ type SetIsFetchingType = ReturnType<typeof toggleIsFetching>
 type setAuthUserDataType = ReturnType<typeof setAuthUserData>
 type setIsFollowingProgressType = ReturnType<typeof toggleIsFollowingProgress>
 
-export type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileType
+export type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileType | setUserStatusType
 export type DialogsActionsTypes = AddNewMessageActionType | UpdateNewMessageActionType
 export type UsersActionsTypes = FollowACType | UnFollowACType | SetUsersACType | SetIsFetchingType | SetCurrentPageType | SetTotalUsersType | setIsFollowingProgressType
 export type AuthActionsTypes = setAuthUserDataType

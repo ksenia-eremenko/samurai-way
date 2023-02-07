@@ -6,6 +6,8 @@ import s from './ProfileInfo.module.scss'
 
 type ProfileInfoType = {
     profile: ProfileDataType
+    status: string
+    updateUserStatus: (status: string) => void
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {
@@ -25,7 +27,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
                     <div className={s.left}>
                         <div className={s.item}>{props.profile.fullName}</div>
                         <div className={`${s.item} ${s.quote}`}>{props.profile.lookingForAJobDescription}</div>
-                        <ProfileStatus status={'Hello my friends'} />
+                        <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
                     </div>
                     <div className={s.right}>
                         <div className={s.jobStatus}>
