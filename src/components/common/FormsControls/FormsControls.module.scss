@@ -1,0 +1,21 @@
+.formControl {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    .inputWrapper {
+        display: flex;
+        width: 100%;
+    }
+    &.error {
+
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid red!important;
+        }
+        span {
+            color: red;
+        }
+    }
+}

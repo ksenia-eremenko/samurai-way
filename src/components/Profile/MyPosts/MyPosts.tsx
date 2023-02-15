@@ -1,6 +1,8 @@
 
 import React from 'react'
 import { Field, reduxForm } from 'redux-form';
+import { maxLengthCreator, requiredField } from '../../../utils/validators';
+import { TextArea } from '../../common/FormsControls/FormsControls';
 import s from './MyPosts.module.scss'
 import { ProfilePropsType } from './MyPostsContainer';
 import Post from './Post/Post'
@@ -23,13 +25,14 @@ const MyPosts = (props: ProfilePropsType) => {
 
 export default MyPosts
 
+const maxLength10 = maxLengthCreator(10)
+
 const AddNewPostForm = (props: any) => {
     return (
         <form className={s.newPost} onSubmit={props.handleSubmit}>
-            <Field name='newPostText' component='textarea'/>
+            <Field name='newPostText' component={TextArea} validate={[requiredField, maxLength10]} />
             <div className={s.btns}>
-                <button
-                >Add Post</button>
+                <button>Add Post</button>
                 {/* <button
                 // onClick={removePostHandler}
                 >Remove</button> */}
