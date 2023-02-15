@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { compose, Dispatch } from 'redux'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
-import { addNewMessageActionCreator, InitialStateType, updateNewMessageActionCreator } from '../../redux/dialogs-reducer'
+import { addNewMessageActionCreator, InitialStateType } from '../../redux/dialogs-reducer'
 import { AppStateType } from '../../redux/redux-store'
 import { Dialogs } from './Dialogs'
 
@@ -10,8 +10,7 @@ type MapStateToPropsType = {
     isAuth: boolean
 }
 type MapDispatchToPropsType = {
-    sendMessage: () => void
-    updateNewMessage: (text: string) => void
+    sendMessage: (message: string) => void
 }
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 let mapStateToProps = (state: AppStateType) => {
@@ -22,15 +21,10 @@ let mapStateToProps = (state: AppStateType) => {
 }
 
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-
     return {
-        sendMessage: () => {
-            dispatch(addNewMessageActionCreator());
-            dispatch(updateNewMessageActionCreator(''));
-        },
-        updateNewMessage: (text: string) => {
-            dispatch(updateNewMessageActionCreator(text));
-        },
+        sendMessage: (message: string) => {
+            dispatch(addNewMessageActionCreator(message));
+        }
     }
 }
 

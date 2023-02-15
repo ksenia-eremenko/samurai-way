@@ -6,7 +6,6 @@ import { userAPI } from "../api/Api";
 import { ActionsTypes } from "./types";
 
 const ADD_POST = "ADD_POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 
@@ -43,7 +42,6 @@ export type ProfileDataType = {
 
 export type InitialStateType = {
     posts: Array<PostType>
-    newPostText: string
     profile: ProfileDataType | null
     status: string
 }
@@ -74,28 +72,22 @@ export const initialState: InitialStateType = {
             avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFk2wFItm6SZ1Nk7BIFYiZY9Qi7e5enjCkPQ&usqp=CAU"
         }
     ],
-    newPostText: "",
     profile: null,
     status: ""
 }
 
 const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
-
-    let stateCopy = { ...state }
     switch (action.type) {
         case ADD_POST:
             return {
                 ...state,
                 posts: [...state.posts, {
                     id: v1(),
-                    message: stateCopy.newPostText,
+                    message: action.newPostText,
                     likeCount: 4,
                     avatar: "https://vjoy.cc/wp-content/uploads/2020/10/2e91c881628ae39e9d7f66a9740f08c0.jpg"
                 }]
             }
-        case UPDATE_NEW_POST_TEXT: {
-            return { ...state, newPostText: action.textPost }
-        }
         case SET_USER_PROFILE: {
             return { ...state, profile: action.profile }
         }
@@ -107,17 +99,11 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
     }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST } as const);
+export const addPostActionCreator = (newPostText: string) => ({ type: ADD_POST, newPostText } as const);
 export const setUserStatus = (status: string) => {
     return {
         type: SET_STATUS,
         status: status
-    } as const
-};
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        textPost: text
     } as const
 };
 export const setUserProfile = (profile: ProfileDataType) => {

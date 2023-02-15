@@ -1,55 +1,19 @@
-import React, { KeyboardEvent } from 'react'
+
+import React from 'react'
+import { Field, reduxForm } from 'redux-form';
 import s from './MyPosts.module.scss'
 import { ProfilePropsType } from './MyPostsContainer';
 import Post from './Post/Post'
 
 
 const MyPosts = (props: ProfilePropsType) => {
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
-
-    const addPostHandler = () => {
-        if (newPostElement.current) {
-            props.addPost();
-            props.updateNewPostText('');
-        }
-    }
-
-    const onChangeHandler = () => {
-        if (newPostElement.current) {
-            let text = newPostElement.current.value;
-            props.updateNewPostText(text);
-        }
-    }
-
-    const removePostHandler = () => {
-        props.updateNewPostText('');
-    }
-
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === "Enter") {
-            addPostHandler();
-        }
+    const addPostHandler = (values: any) => {
+        props.addPost(values.newPostText);
     }
 
     return (
         <div className={s.posts}>
-            <div className={s.newPost}>
-                <textarea
-                    placeholder='Введите текст'
-                    value={props.profile.newPostText}
-                    ref={newPostElement}
-                    onChange={onChangeHandler}
-                    onKeyPress={onKeyPressHandler}
-                />
-                <div className={s.btns}>
-                    <button
-                        onClick={addPostHandler}
-                    >Add Post</button>
-                    <button
-                        onClick={removePostHandler}
-                    >Remove</button>
-                </div>
-            </div>
+            <AddNewPostFormRedux onSubmit={addPostHandler} />
             <div className={s.items}>
                 {props.profile.posts.map(e => <Post message={e.message} key={e.id} likeCount={e.likeCount} avatar={e.avatar} />)}
             </div>
@@ -58,3 +22,20 @@ const MyPosts = (props: ProfilePropsType) => {
 }
 
 export default MyPosts
+
+const AddNewPostForm = (props: any) => {
+    return (
+        <form className={s.newPost} onSubmit={props.handleSubmit}>
+            <Field name='newPostText' component='textarea'/>
+            <div className={s.btns}>
+                <button
+                >Add Post</button>
+                {/* <button
+                // onClick={removePostHandler}
+                >Remove</button> */}
+            </div>
+        </form>
+    )
+}
+
+const AddNewPostFormRedux = reduxForm({ form: 'Profile add new post form' })(AddNewPostForm)

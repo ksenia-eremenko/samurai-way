@@ -4,7 +4,6 @@ import {
 import { ActionsTypes } from "./types";
 
 const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE";
-const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE";
 
 export type DialogType = {
     id: number,
@@ -68,8 +67,7 @@ const initialState = {
             id: v1(),
             textMessage: "textMessage #6"
         }
-    ] as MessagesType[],
-    newMessageText: ""
+    ] as MessagesType[]
 }
 export type InitialStateType = typeof initialState
 
@@ -78,23 +76,13 @@ const dialogsReducer = (state: InitialStateType = initialState, action: ActionsT
         case ADD_NEW_MESSAGE:
             return {
                 ...state,
-                messages: [...state.messages, { id: v1(), textMessage: state.newMessageText }]
-            }
-        case UPDATE_NEW_MESSAGE:
-            return {
-                ...state,
-                newMessageText: action.textMessage
+                messages: [...state.messages, { id: v1(), textMessage: action.message }]
             }
         default:
             return state;
     }
 }
-export const addNewMessageActionCreator = () => ({ type: ADD_NEW_MESSAGE } as const);
-export const updateNewMessageActionCreator = (text: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE,
-        textMessage: text
-    } as const
-}
+export const addNewMessageActionCreator = (message: string) => ({ type: ADD_NEW_MESSAGE, message } as const);
+
 
 export default dialogsReducer;
